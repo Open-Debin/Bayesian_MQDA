@@ -1,8 +1,8 @@
-# MetaQDA_Pub
-# Shallow Bayesian Meta Learning for Real-World Few-Shot Recognition
+
+### Shallow Bayesian Meta Learning for Real-World Few-Shot Recognition
 Arxiv Version: https://arxiv.org/abs/2101.02833
 
-## 0. Outline
+### 0. Outline
 #### Preparation
   - download data
   - download models
