@@ -16,7 +16,7 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
 
 ## 1. Preparation
 #### 1.1 download data
-For mini-Imagenet experiments, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it in ./data/mini and run proc_image.py to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
+For mini-Imagenet, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it in ./data/mini and run proc_image.py to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
 #### 1.2 download models
 dropbox link
 #### 1.3 extract features
