@@ -34,7 +34,7 @@ We provide networks like: conv4, resnet18, wrn_28_20
 
 download link.
 
-please put the models at {project_dir}/encoder/pretrained_models
+please put the models at $project_dir/encoder/pretrained_models
 
 #### 1.3 extract features
 
