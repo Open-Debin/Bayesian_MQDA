@@ -17,9 +17,31 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
 ## 1. Preparation
 #### 1.1 download data
 For mini-Imagenet, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it in ./data/mini and run proc_image.py to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
+
+For tiered-ImageNet
+
+For cifar-fs
+
+For cub
+
+For cars
+
+For mini-ImageNet (class incremental learning version)
+
 #### 1.2 download models
-dropbox link
+name format: {net_domain}-{net_arch}.pkl. for example: mini-conv.pkl.
+We provide networks like: conv4, resnet18, wrn_28_20
+
+download link.
+
+please put the models at {project_dir}/{encoder}/{pretrained-models}
+
 #### 1.3 extract features
+
+```
+python extract_features.py --encoder 'encoder name' --dataset 'dataset name'
+```
+
 
 ## 2. Experiments
 #### 2.1 Instructions
