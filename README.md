@@ -19,8 +19,9 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
 E.g., as for mini-Imagenet, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it in ./data/mini and run proc_image.py to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
 
 #### 1.2 download models
-name format: ```$net_domain-$net_arch.pkl```. for example: ```mini-conv.pkl```.
-We provide networks like: conv4, resnet18, wrn_28_20
+name format: ```$net_domain-$net_arch.pkl```. e.g. ```mini-conv.pkl```.
+
+network backbones: conv4, resnet18, wrn_28_20
 
 [download link.]
 
