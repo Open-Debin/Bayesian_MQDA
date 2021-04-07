@@ -5,7 +5,7 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
 ### 0. Outline
 #### Preparation
   - download data
-  - download models
+  - download encoders
   - extract features
 #### Experiments
   - Instruction
