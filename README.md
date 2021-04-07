@@ -15,8 +15,8 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
   - Few Shot Class Incremental Learning
 
 ## 1. Preparation
-#### 1.1 download data
-E.g., as for mini-Imagenet, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it in ./data/mini and run proc_image.py to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
+#### 1.1 download datasets
+e.g., as for mini-Imagenet, please download [mini-Imagenet](https://drive.google.com/open?id=0B3Irx3uQNoBMQ1FlNXJsZUdYWEE) and put it at ```./data/mini``` and run ```proc_image.py``` to preprocess generate train/val/test datasets. (This process method is based on [maml](https://github.com/cbfinn/maml)).
 
 #### 1.2 download models
 name format: ```$net_domain-$net_arch.pkl```. e.g. ```mini-conv.pkl```.
@@ -25,7 +25,7 @@ network backbones: conv4, resnet18, wrn_28_20
 
 [download link.]
 
-please put the models at '''./project_dir/encoder/pretrained_models```
+save models at ```./project_dir/encoder/pretrained_models```
 
 #### 1.3 extract features
 
