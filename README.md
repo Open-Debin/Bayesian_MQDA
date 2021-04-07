@@ -38,7 +38,7 @@ python extract_features.py --encoder 'encoder name' --dataset 'dataset name'
 
 the following log_name is created after the training process
 #### 2.1 Single-Domain Few Shot Learning
-'''e.g.: {5Way} {5Shot}, using encoder {conv4} on {mini(ImageNet)} dataset, using MetaQDA {MAP} version'''
+e.g.: 5Way-5Shot, using encoder ```conv4``` on ```miniImagenet``` dataset, using ```MetaQDA_MAP``` version
 
 ```
 python train.py --n_way 5 --k_spt 5 --net_domain mini --net_arch conv4 --strategy map
@@ -46,7 +46,7 @@ python test.py -l_n log_name
 ```
 
 #### 2.2 Cross-Domain Few Shot Testing
-''' e.g.: testing trained models {log_name} on {cub} dataset''' 
+e.g.: testing trained models ```$log_name``` on ```cub``` dataset
 ```
 python test.py -l_n log_name -x_d cub
 ```
