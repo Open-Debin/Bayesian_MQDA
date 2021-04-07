@@ -35,6 +35,7 @@ python extract_features.py --encoder 'encoder name' --dataset 'dataset name'
 ## 2. Experiments
 * ``` --lr ```: initial learning rate
 * ``` --feature_or_logits ```: using features or logits from the encoder. 0 is features; 1 is logits
+
 the following log_name is created after the training process
 #### 2.1 Single-Domain Few Shot Learning
 '''e.g.: {5Way} {5Shot}, using encoder {conv4} on {mini(ImageNet)} dataset, using MetaQDA {MAP} version'''
