@@ -9,10 +9,10 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
   - download encoders
   - extract features
 #### Experiments
-  - Single-Domain Few Shot Learning
-  - Cross-Domain Few Shot Testing
-  - Multi-Domain Few Shot Learning: Meta-dataset
-  - Few Shot Class Incremental Learning
+  - (sd fsl) Single-Domain Few Shot Learning
+  - (cd fsl) Cross-Domain Few Shot Testing
+  - (md fsl) Multi-Domain Few Shot Learning: Meta-dataset
+  - (fscil) Few Shot Class Incremental Learning
 
 ## 1. Preparation
 #### 1.1 download datasets
