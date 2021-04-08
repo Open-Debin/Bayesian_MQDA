@@ -13,6 +13,7 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
   - (cd fsl) Cross-Domain Few Shot Testing
   - (md fsl) Multi-Domain Few Shot Learning: Meta-dataset
   - (fscil) Few Shot Class Incremental Learning
+  - Compute Calibration Error
 
 ## 1. Preparation
 #### 1.1 download datasets
@@ -62,4 +63,7 @@ python test_urt_mqda.py -l_n "log name"
 python train_mqda_incremental.py
 python test_mqda_map_incremental.py -l_n "log name"
 ```
-
+#### 2.5 Compute Calibration Error
+```
+python compute_ece.py -l_n "log name"
+```
