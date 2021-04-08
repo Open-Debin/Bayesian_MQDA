@@ -38,28 +38,28 @@ python extract_features.py --encoder 'encoder name' --dataset 'dataset name'
 * ``` --lr ```: initial learning rate
 * ``` --feature_or_logits ```: using features or logits from the encoder. 0 is features; 1 is logits
 
-the following log_name is created after the training process
+the following "log name" is created after the training process
 #### 2.1 Single-Domain Few Shot Learning
 e.g.: 5Way-5Shot, using encoder ```conv4``` on ```miniImagenet``` dataset, using ```MetaQDA_MAP``` version
 
 ```
 python train.py --n_way 5 --k_spt 5 --net_domain mini --net_arch conv4 --strategy map
-python test.py -l_n log_name
+python test.py -l_n "log name"
 ```
 
 #### 2.2 Cross-Domain Few Shot Testing
 e.g.: testing trained models ```$log_name``` on ```cub``` dataset
 ```
-python test.py -l_n log_name -x_d cub
+python test.py -l_n "log name" -x_d cub
 ```
 #### 2.3 Multi-Domain Few Shot Learning: Meta-dataset
 ```
 python train_urt_mqda.py
-python test_urt_mqda.py -l_n log_name
+python test_urt_mqda.py -l_n "log name"
 ```
 #### 2.4 Few-shot Class Incremental Learning
 ```
 python train_mqda_incremental.py
-python test_mqda_map_incremental.py -l_n log_name
+python test_mqda_map_incremental.py -l_n "log name"
 ```
 
