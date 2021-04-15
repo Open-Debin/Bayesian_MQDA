@@ -14,14 +14,14 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
 def main():
     xargs = config_parameters()
-    if xargs.net_arch == "resnet18":
+    if xargs.encoder == "resnet18":
         model = torch.nn.DataParallel(ConvNets.resnet18(num_classes=64)).cuda()
-        path = './model_parameters/{:}/model_best.pth.tar'.format(xargs.dataset_train, xargs.net_arch)
+        path = './model_parameters/{:}/model_best.pth.tar'.format(xargs.dataset_train, xargs.encoder)
         model.load_state_dict(torch.load(path)['state_dict'])
     else:
-        raise ValueError('This Code Only support for ResNet18, but your input is', xargs.net_arch)
+        raise ValueError('This Code Only support for ResNet18, but your input is', xargs.encoder)
         
-    save_dir = './data/features/{:}-{:}-{:}-fea.pkl'.format(xargs.dataset_train, xargs.net_arch, xargs.dataset_inference)
+    save_dir = './data/features/{:}-{:}-{:}-fea.pkl'.format(xargs.dataset_train, xargs.encoder, xargs.dataset_inference)
     print(path)
     print(save_dir)
     
@@ -44,7 +44,7 @@ def main():
 def config_parameters():
     parser = argparse.ArgumentParser(description= 'few-shot testing script' )
     parser.add_argument('--dataset_train', help='which domain of dataset used for training network') 
-    parser.add_argument('--net_arch', help='net architecture')
+    parser.add_argument('--encoder', help='net architecture')
     parser.add_argument('--dataset_inference', help='which domain of dataset used for feature extraction')
     parser.add_argument('--path2image', './data/')    
     return parser.parse_args()
