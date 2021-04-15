@@ -284,17 +284,66 @@ class ImageFileDataset(Dataset):
         return image1, image_root
     
     
-def load_data(data_list, batch=64, _transform=''):
-    train_dataset = ImageDataset(
-        image_roots=data_list,
-        transform=_transform)
+def data_list(data_root):
+    data_list = []
+    for root, dirs, files in os.walk(data_root):
+        for name in files:
+            full_name = os.path.join(root,name)
+            data_list.append(full_name)
+    return data_list
 
-    train_loader = torch.utils.data.DataLoader(
-        train_dataset,
-        batch_size=batch, shuffle=False,
-        num_workers=8, pin_memory=True, drop_last=False)
+class Dataset_for_SD_CD(Dataset):
+
+    def __init__(self, image_roots, transform=None):
+        self.transform = transform # Torch operations on the input image
+        self.image_roots = image_roots
+
+    def __len__(self):
+        return len(self.image_roots)
+
+    def __getitem__(self, idx):
+        image_root = self.image_roots[idx]
+        image = Image.open(image_root)
+        image = image.convert('RGB')
+        if self.transform is not None:
+            image1 = self.transform(image)
+            
+        return image1, image_root
     
-    return train_loader
+class FeatureDictMaker:
+    def __init__(self, model, head_root):
+        self.feature_list = []
+        self.logits_list=[]
+        self.name_list = [] 
+        self.model = model
+        self.model.eval()
+        self.head_root = head_root
+        
+    def _extract_features(self, dataloader):
+        with torch.no_grad():
+            for img, name in dataloader:
+                fea, logits = self.model(img.to('cuda'), True)
+                self.fea_list.append(fea.cpu())
+                self.logits_list.append(logits.cpu())
+                self.name_list=self.name_list+name 
+                
+    def mean_features(self,):
+        return torch.cat(self.fea_list, dim = 0).mean(dim=0)
+    
+    def mean_logits(self,):
+        return torch.cat(self.logits_list, dim = 0).mean(dim=0) 
+    
+    def make_dict(self):    
+        fea_tensor = torch.cat(self.fea_list, dim = 0)
+        logits_tensor = torch.cat(self.logits_list, dim = 0)
+        fea_dict = collections.defaultdict(list)
+        logits_dict = collections.defaultdict(list)
+        for item_f, item_l, label in zip(fea_tensor,logits_tensor, self.name_list):
+            fea_dict[label.replace(self.head_root,'')].append(item_f)
+            logits_dict[label.replace(self.head_root,'')].append(item_l)
+
+        return fea_dict, logits_dict
+    
 
 
 def whole_fit_fake(folder_fake_close_set, nj=256):

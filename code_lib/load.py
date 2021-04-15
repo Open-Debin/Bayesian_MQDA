@@ -12,6 +12,18 @@ from code_models import classifiers
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
+def data(data_list, batch=64, _transform=''):
+    train_dataset = generate.Dataset_for_SD_CD(
+        image_roots=data_list,
+        transform=_transform)
+
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset,
+        batch_size=batch, shuffle=False,
+        num_workers=8, pin_memory=True, drop_last=False)
+    
+    return train_loader
+
 def batch_name(data_list, batch=64):
     train_dataset = generate.ImageNameDataset(
         image_roots=data_list)
