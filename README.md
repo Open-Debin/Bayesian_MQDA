@@ -31,7 +31,7 @@ save models at ```$project_dir/encoder/pretrained_models```
 #### 1.3 extract features
 
 ```
-python extract_features.py --encoder 'encoder name' --dataset 'dataset name'
+python extract_features.py --encoder 'encoder name' --train_dataset 'train dataset' --dataset_inference 'inference dataset'
 ```
 
 
