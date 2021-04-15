@@ -24,9 +24,9 @@ name format: ```$net_domain-$net_arch.pkl```. e.g. ```mini-conv4.pkl```.
 
 network backbones: conv4, resnet18, wrn_28_20
 
-[download link.]
+[download link.](https://pan.baidu.com/s/1Jcoyo-xk70axNr4ETZ0s1A) passport: 5kxg
 
-save models at ```$project_dir/encoder/pretrained_models```
+save models at ```$project_dir/encoder/model_parameters```
 
 #### 1.3 extract features
 
