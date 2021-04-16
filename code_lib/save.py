@@ -1,5 +1,6 @@
+import pickle
 import torch
-
+import collections
 def checkpoint_epoch(model_state, epoch_index, optimizer_state, lr_scheduler_state, args):
     args.index_epoch = epoch_index
     info = {'args': args, 'optim' : optimizer_state, 'scheduler' : lr_scheduler_state, 'mqda' : model_state}
