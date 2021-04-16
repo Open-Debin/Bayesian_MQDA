@@ -31,7 +31,7 @@ save models at ```$project_dir/encoder/model_parameters```
 #### 1.3 extract features
 
 ```
-python extract_features.py --encoder 'encoder name' --train_dataset 'train dataset' --dataset_inference 'inference dataset'
+python extract_features.py --encoder 'encoder name' --dataset_train 'train dataset' --dataset_inference 'inference dataset'
 ```
 
 
