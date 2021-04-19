@@ -110,6 +110,7 @@ def config_local_parameters():
     parser.add_argument('--optimizer', default='sgd', help='sgd, adam')    
     parser.add_argument('--lr_scheduler', default='multsteplr', type=str,help='consinelr, multsteplr')
     parser.add_argument('--strategy', default='map', help='')
+    parser.add_argument('--reg_param', default=0.5, type=float)
     
     parser.add_argument('--path2image', default='../../data_src/images/mini_incremental/', help='path to all datasets: CUB, Mini, etc')
     parser.add_argument('--seed', default=4603, type=int, help='')
