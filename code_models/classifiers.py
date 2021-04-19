@@ -59,7 +59,7 @@ class MetaQDA_MAP(nn.Module):
         return predicts_matrix
     
     def regularize(self, sigma):
-        return (1-self.reg_param) * sigma + self.reg_param * torch.eye(self.feature_dim).to(DEVICE)
+        return (1-self.reg_param) * sigma + self.reg_param * torch.eye(self.x_dim).to(DEVICE)
 
     
 class MetaQDA_FB(nn.Module):
