@@ -73,7 +73,7 @@ def config_local_parameters():
     parser.add_argument('--seed', default=4603, type=int, help='random seed')                    
     args = parser.parse_args()
     
-    args.path2features='../../data_src/fea_mqda/{:}-{:}-{:}-fea.pkl'.format(args.net_domain,args.net_arch,args.net_domain)
+    args.path2features='../data/features/{:}-{:}-{:}-fea.pkl'.format(args.net_domain,args.net_arch,args.net_domain)
     args.base_path=os.path.join(args.path2image+'{:}/train'.format(args.net_domain))
     args.val_path=args.base_path.replace('train','val')
     args.log_dir = '../log/SD_CD_FSL/{:}_{:}_{:}_{:}_{:}_{:}N{:}K_{:}'.format(args.net_domain,args.net_arch, args.optimizer, args.strategy, args.lr, args.n_way, args.k_spt, ['features','logits'][args.feature_or_logits])
