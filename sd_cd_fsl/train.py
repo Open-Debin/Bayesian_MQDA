@@ -70,6 +70,7 @@ def config_local_parameters():
     
     parser.add_argument('--strategy', default='map', help='map_fixshot, map (Maximum Posterior Distribution), fb (Fully Bayes)')    
     parser.add_argument('--path2image', default='../../data_src/images/', help='the path that stores all datasets: CUB, Mini, etc')
+    parser.add_argument('--reg_param', default=0.5, type=float)
     parser.add_argument('--seed', default=4603, type=int, help='random seed')                    
     args = parser.parse_args()
     
