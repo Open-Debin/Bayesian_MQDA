@@ -31,7 +31,7 @@ save models at ```$project_dir/encoder/model_parameters```
 #### 1.3 extract features
 
 ```
-python extract_features.py --encoder 'encoder name' --train_dataset 'train dataset' --dataset_inference 'inference dataset'
+python extract_features.py --encoder 'conv4/resnet18/wrn' --dataset_train 'mini/tiered/cifarfs' --dataset_inference 'mini/tiered/cifarfs/cub/cars'
 ```
 
 
