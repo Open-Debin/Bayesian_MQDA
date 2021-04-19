@@ -158,6 +158,7 @@ def load_config():
     parser.add_argument('--optimizer', default='adam',type=str, help='optimization method (default: momentum)')
     parser.add_argument('-lr','--lr', default=3e-4, type=float, help='learning rate (default: 0.0001)')
     parser.add_argument('--x_dim', default=1024, type=int, help='dimensional of the features for the input of mqda')
+    parser.add_argument('--reg_param', default=0.5, type=float)
     
     # urt related
     parser.add_argument('--urt_head', default=2, type=int, help='')
