@@ -81,5 +81,6 @@ python compute_ece.py -l_n "log name"
 ```
 
 ## 3. References
-#### Code References
-
+- dataloader reference: [RelationNet](https://github.com/floodsung/LearningToCompare_FSL/blob/master/miniimagenet/task_generator_test.py)
+- cub, cars dataset reference: [CrossDomainFewShot](https://github.com/hytseng0509/CrossDomainFewShot/blob/master/filelists/process.py)
+- metadataset train.py reference: [urt](https://github.com/liulu112601/URT/blob/master/fast-exps/urt-avg-head.py)
