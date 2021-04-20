@@ -1,0 +1,4 @@
+- Step1: download [data1](http://imagenet.stanford.edu/internal/car196/cars_train.tgz) and [data2](wget https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz), then put it at the dir ${Project_dir}/data/cars/source
+- Step2: tar -zxf cars_train.tgz && tar -zxf car_devkit.tgz
+- Step3: cd ..
+- Step4: python write_cars_filelist.py
