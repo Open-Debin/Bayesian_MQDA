@@ -14,6 +14,8 @@ Arxiv Version: https://arxiv.org/abs/2101.02833
   - (md fsl) Multi-Domain Few Shot Learning: Meta-dataset
   - (fscil) Few Shot Class Incremental Learning
   - Compute Calibration Error
+#### References
+  - code references
 
 ## 1. Preparation
 #### 1.1 download datasets
@@ -73,3 +75,7 @@ python test_mqda_map_incremental.py -l_n "log name"
 ```
 python compute_ece.py -l_n "log name"
 ```
+
+## 3. References
+#### Code References
+
