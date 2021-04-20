@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 from pathlib import Path
+import collections
 import torch
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.sampler import Sampler
@@ -312,7 +313,7 @@ class Dataset_for_SD_CD(Dataset):
     
 class FeatureDictMaker:
     def __init__(self, model, head_root):
-        self.feature_list = []
+        self.features_list = []
         self.logits_list=[]
         self.name_list = [] 
         self.model = model
@@ -322,27 +323,27 @@ class FeatureDictMaker:
     def _extract_features(self, dataloader):
         with torch.no_grad():
             for img, name in dataloader:
-                fea, logits = self.model(img.to('cuda'), True)
-                self.fea_list.append(fea.cpu())
+                fea, logits = self.model(img.to('cuda'))
+                self.features_list.append(fea.cpu())
                 self.logits_list.append(logits.cpu())
                 self.name_list=self.name_list+name 
                 
-    def mean_features(self,):
-        return torch.cat(self.fea_list, dim = 0).mean(dim=0)
+    def mean_features(self):
+        return torch.cat(self.features_list, dim = 0).mean(dim=0)
     
-    def mean_logits(self,):
+    def mean_logits(self):
         return torch.cat(self.logits_list, dim = 0).mean(dim=0) 
     
     def make_dict(self):    
-        fea_tensor = torch.cat(self.fea_list, dim = 0)
+        features_tensor = torch.cat(self.features_list, dim = 0)
         logits_tensor = torch.cat(self.logits_list, dim = 0)
-        fea_dict = collections.defaultdict(list)
+        features_dict = collections.defaultdict(list)
         logits_dict = collections.defaultdict(list)
-        for item_f, item_l, label in zip(fea_tensor,logits_tensor, self.name_list):
-            fea_dict[label.replace(self.head_root,'')].append(item_f)
+        for item_f, item_l, label in zip(features_tensor,logits_tensor, self.name_list):
+            features_dict[label.replace(self.head_root,'')].append(item_f)
             logits_dict[label.replace(self.head_root,'')].append(item_l)
 
-        return fea_dict, logits_dict
+        return features_dict, logits_dict
     
 
 

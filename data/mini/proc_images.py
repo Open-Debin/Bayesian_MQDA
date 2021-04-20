@@ -24,7 +24,6 @@ all_images = glob.glob(path_to_images + '*')
 
 for i, image_file in enumerate(all_images):
     im = Image.open(image_file)
-    im = im.resize((84, 84), resample=Image.LANCZOS)
     im.save(image_file)
     if i % 500 == 0:
         print(i)

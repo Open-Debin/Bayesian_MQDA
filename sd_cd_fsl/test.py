@@ -12,7 +12,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from code_lib import generate, load, metric, util
-from code_models.classifiers import MaximumLikelihood
 from code_models import layers, losses
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
 def main():

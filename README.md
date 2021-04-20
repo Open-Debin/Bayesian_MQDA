@@ -31,7 +31,7 @@ save models at ```$project_dir/encoder/model_parameters```
 #### 1.3 extract features
 
 ```
-python extract_features.py --encoder 'encoder name' --train_dataset 'train dataset' --dataset_inference 'inference dataset'
+python extract_features.py --encoder 'conv4/resnet18/wrn' --dataset_train 'mini/tiered/cifarfs' --dataset_inference 'mini/tiered/cifarfs/cub/cars'
 ```
 
 
@@ -54,6 +54,12 @@ e.g.: testing trained models ``` "log name" ``` on ```cub``` dataset
 python test.py -l_n "log name" -x_d cub
 ```
 #### 2.3 Multi-Domain Few Shot Learning: Meta-dataset
+1. Installation Meta-Dataset
+Follow the the "User instructions" in the [Meta-Dataset repository](https://github.com/google-research/meta-dataset#user-instructions) for "Installation" and "Downloading and converting datasets".
+
+2. Download features
+download all the extracted features from [HERE](https://drive.google.com/drive/folders/1Z3gsa4TSSiH2wTZj1Jp5bD7UEKPOVzx5?usp=sharing) and put it in the ${Project_dir}/data/meta-dataset/
+
 ```
 python train_urt_mqda.py
 python test_urt_mqda.py -l_n "log name"

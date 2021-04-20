@@ -16,68 +16,12 @@ from code_lib import util, load
 torch.set_default_tensor_type(torch.FloatTensor)
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-class MetaQDA_FB_FixShot(nn.Module):
-    def __init__(self, fea_dim):
-        super(MetaQDA_FB_FixShot, self).__init__()
-        self.feature_dim = fea_dim
-#         self.fix_Nj = fix_Nj
-        self.plogdet = PLogDet.apply
-        
-        self.m = torch.nn.Parameter(torch.zeros(1, self.feature_dim))
-        self.kappa = torch.nn.Parameter(torch.tensor(0.1))
-        self.nu = torch.nn.Parameter(torch.tensor(self.feature_dim, dtype=torch.float32))
-        self.triu_S_diag = torch.nn.Parameter(torch.ones(self.feature_dim))
-        self.triu_S_lower = torch.nn.Parameter(torch.eye(self.feature_dim))
-        self.triu_S_lower_mask = torch.triu(torch.ones(self.feature_dim, self.feature_dim), diagonal=1).t().to(DEVICE)
 
-    def fit_image_label(self, X, y):
-        self.classes = np.unique(y.cpu())
-        self.mu = [None for i in self.classes]
-        self.sigma_inv = [None for i in self.classes]
-        self.biases = [None for i in self.classes]
-        self.fix_Nj = 5 #X.shape[0]/(y.max().item()+1)
-        
-        kappa_n, m_with_weight, xmean_weight, scatter_matrix, self.sharedpart, bias_sharedpart = self.compute_shared_part()
-        for j in self.classes:
-            X_j = X[y==j]
-            x_mean = torch.mean(X_j, dim=0, keepdim=True)
-            self.mu[j] = m_with_weight+x_mean.mul(xmean_weight)
-            sigma_j_no_scale = scatter_matrix+mean_outer(X_j)+self_outer(x_mean-self.m).mul(torch.abs(self.kappa)+1e-6).div(kappa_n) 
-            sigma_j = torch.div(sigma_j_no_scale, (kappa_n+1).div(kappa_n.mul(self.sharedpart)))
-            self.sigma_inv[j] = torch.inverse(sigma_j)
-            self.biases[j] = bias_sharedpart-0.5*torch.logdet(sigma_j)
-            
-    def predict(self, X):
-        predicts_matrix=[]      
-        for i in range(X.shape[0]):
-            neg_distrances=[]
-            for mu, sigma_inv, bias in zip(self.mu, self.sigma_inv, self.biases):
-                neg_distrances.append(bias-0.5*(self.sharedpart+self.feature_dim)*torch.log(1.0+(1.0/self.sharedpart)*self.compute_distance(X[i, :],mu,sigma_inv)))
-            predicts_matrix.append(torch.cat(neg_distrances, dim=1))
-        predicts_matrix = torch.cat(predicts_matrix, dim=0)
-        return predicts_matrix
-    
-    def compute_shared_part(self):
-        self.lower_triu = torch.diag(torch.abs(self.triu_S_diag))+self.triu_S_lower*self.triu_S_lower_mask
-        kappa_n = torch.abs(self.kappa) + 1e-6 + self.fix_Nj
-        m_with_weight = torch.abs(self.kappa + 1e-6).div(kappa_n)*self.m
-#         pdb.set_trace()
-        xmean_weight = torch.div(self.fix_Nj, kappa_n)
-        scatter_matrix = self_outer(self.lower_triu)
-        sharedpart = torch.clamp(self.nu, min=self.feature_dim-1+1e-6)+self.fix_Nj-self.feature_dim+2
-        bias_sharedpart = torch.lgamma(0.5*(sharedpart+self.feature_dim))-torch.lgamma(0.5*sharedpart)-0.5*self.feature_dim*torch.log(sharedpart)
-        
-        return kappa_n, m_with_weight, xmean_weight, scatter_matrix, sharedpart, bias_sharedpart
-        
-    def compute_distance(self, x, mu, sigma_inv):
-        diff = x - mu
-        gaussian_dist = torch.mm(torch.mm(diff, sigma_inv), diff.t())
-        return gaussian_dist
-    
 class MetaQDA_MAP(nn.Module):
     def __init__(self, args):
         super(MetaQDA_MAP, self).__init__()
         self.x_dim = args.x_dim
+        self.reg_param = args.reg_param
         self.m = torch.nn.Parameter(torch.zeros(1, self.x_dim))
         self.kappa = torch.nn.Parameter(torch.tensor(0.1))
         self.nu = torch.nn.Parameter(torch.tensor(self.x_dim, dtype=torch.float32))
@@ -115,7 +59,7 @@ class MetaQDA_MAP(nn.Module):
         return predicts_matrix
     
     def regularize(self, sigma):
-        return (sigma + torch.eye(self.x_dim).to(DEVICE)).div(2)
+        return (1-self.reg_param) * sigma + self.reg_param * torch.eye(self.x_dim).to(DEVICE)
 
     
 class MetaQDA_FB(nn.Module):
