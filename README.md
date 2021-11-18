@@ -1,7 +1,7 @@
 # Bayesian_MQDA
 《Shallow Bayesian Meta Learning for Real World Few-shot Recognition》
 
-Arxiv Version: https://arxiv.org/abs/2101.02833
+ICCV 2021 Version: https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Shallow_Bayesian_Meta_Learning_for_Real-World_Few-Shot_Recognition_ICCV_2021_paper.pdf
 
 ### 0. Outline
 #### Preparation
